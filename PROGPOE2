@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace RecipeApp
+{
+    class Program
+    {
+        static List<Recipe> recipes;
+        static Recipe currentRecipe;
+
+        static void Main(string[] args)
+        {
+            recipes = new List<Recipe>();
+            bool runProgram = true;
+
+            while (runProgram)
+            {
+                Console.WriteLine("Please select an option:");
+                Console.WriteLine("1. Enter a new recipe");
+                Console.WriteLine("2. Display recipes");
+                Console.WriteLine("3. Display recipe");  
+                Console.WriteLine("4. Scale recipe quantities");
+                Console.WriteLine("5. Reset recipe quantities");
+                Console.WriteLine("6. Clear recipes");
+                Console.WriteLine("7. Exit program");
+
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        EnterRecipe();
+                        break;
+                    case "2":
+                        DisplayRecipes();
+                        break;
+                    case "3":
+                        DisplayRecipe();
+                        break;  
+                    case "4":
+                        ScaleRecipe();
+                        break;
+                    case "5":
+                        ResetRecipe();
+                        break;
+                    case "6":
+                        ClearRecipes();
+                        break;
+                    case "7":
+                        runProgram = false;
+                        break;
+                }
+            }
+        }
+        
+        // Rest of code omitted for brevity
+        
+}
+```
+
+Recipe class:
+```csharp
+public class Recipe 
+{
+    public string Name { get; set; }
+    private List<Ingredient> ingredients;
+    private List<Step> steps;
+    private int calories;
+
+    public Recipe(string name)
+    {
+        Name = name;
+        ingredients = new List<Ingredient>();
+        steps = new List<Step>();
+        calories = 0;
+    }
+
+    // Rest of code omitted for brevity
+} 
