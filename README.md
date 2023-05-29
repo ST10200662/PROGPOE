@@ -45,9 +45,9 @@ To run the app:
 3. Follow the on-screen prompts
 
 ## Links
-- [GitHub Repository](github.com//recipe-app)
+- [GitHub Repository](https://github.com/ST10200662/PROGPOE)
 
 ![GitHub commit history](commit-history.png)
 
 ## Authors
-John Doe
+Prince Lepato Selane
