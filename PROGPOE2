@@ -1,3 +1,178 @@
+Recipe.cs:
+public class Recipe
+{
+    public string Name { get; set; }
+    private List<Ingredient> ingredients;
+    private List<Step> steps;
+    private int calories;
+
+    public Recipe(string name)
+    {
+        Name = name;
+        ingredients = new List<Ingredient>();
+        steps = new List<Step>();
+        calories = 0;
+    }
+
+    public void AddIngredient(Ingredient ingredient)
+    {
+        ingredients.Add(ingredient);
+        calories += ingredient.Calories;
+    }
+
+    public void AddStep(Step step)
+    {
+        steps.Add(step);
+    }
+
+    public void DisplayRecipe()
+    {
+        Console.WriteLine("Recipe: " + Name);
+        Console.WriteLine("Ingredients:");
+        foreach (Ingredient ingredient in ingredients)
+        {
+            Console.WriteLine("- " + ingredient.Name + ": " + ingredient.Quantity + " " + ingredient.Unit + ", " + ingredient.Calories + " calories, " + ingredient.FoodGroup);
+        }
+        Console.WriteLine("Steps:");
+        int stepNumber = 1;
+        foreach (Step step in steps)
+        {
+            Console.WriteLine(stepNumber + ". " + step.Description);
+            stepNumber++;
+        }
+        Console.WriteLine("Total calories: " + calories);
+    }
+
+    public void ScaleRecipe(int factor)
+Here's the full code for the RecipeApp, including the Recipe, Ingredient, and Step classes, as well as the Program class with all the functionality for Part 2:
+
+Recipe.cs:
+public class Recipe
+{
+    public string Name { get; set; }
+    private List<Ingredient> ingredients;
+    private List<Step> steps;
+    private int calories;
+
+    public Recipe(string name)
+    {
+        Name = name;
+        ingredients = new List<Ingredient>();
+        steps = new List<Step>();
+        calories = 0;
+    }
+
+    public void AddIngredient(Ingredient ingredient)
+    {
+        ingredients.Add(ingredient);
+        calories += ingredient.Calories;
+    }
+
+    public void AddStep(Step step)
+    {
+        steps.Add(step);
+    }
+
+    public void DisplayRecipe()
+    {
+        Console.WriteLine("Recipe: " + Name);
+        Console.WriteLine("Ingredients:");
+        foreach (Ingredient ingredient in ingredients)
+        {
+            Console.WriteLine("- " + ingredient.Name + ": " + ingredient.Quantity + " " + ingredient.Unit + ", " + ingredient.Calories + " calories, " + ingredient.FoodGroup);
+        }
+        Console.WriteLine("Steps:");
+        int stepNumber = 1;
+        foreach (Step step in steps)
+        {
+            Console.WriteLine(stepNumber + ". " + step.Description);
+            stepNumber++;
+        }
+        Console.WriteLine("Total calories: " + calories);
+    }
+
+    public void ScaleRecipe(int factor)
+    {
+I apologize for the confusion in my previous response. Here's the complete code for the RecipeApp, including the Recipe, Ingredient, and Step classes, as well as the Program class with all the functionality for Part 2:
+
+Recipe.cs:
+public class Recipe
+{
+    public string Name { get; set; }
+    private List<Ingredient> ingredients;
+    private List<Step> steps;
+    private int calories;
+
+    public Recipe(string name)
+    {
+        Name = name;
+        ingredients = new List<Ingredient>();
+        steps = new List<Step>();
+        calories = 0;
+    }
+
+    public void AddIngredient(Ingredient ingredient)
+    {
+        ingredients.Add(ingredient);
+        calories += ingredient.Calories;
+    }
+
+    public void AddStep(Step step)
+    {
+        steps.Add(step);
+    }
+
+    public void DisplayRecipe()
+    {
+        Console.WriteLine("Recipe: " + Name);
+        Console.WriteLine("Ingredients:");
+        foreach (Ingredient ingredient in ingredients)
+        {
+            Console.WriteLine("- " + ingredient.Name + ": " + ingredient.Quantity + " " + ingredient.Unit + ", " + ingredient.Calories + " calories, " + ingredient.FoodGroup);
+        }
+        Console.WriteLine("Steps:");
+        int stepNumber = 1;
+        foreach (Step step in steps)
+        {
+            Console.WriteLine(stepNumber + ". " + step.Description);
+            stepNumber++;
+        }
+        Console.WriteLine("Total calories: " + calories);
+    }
+
+Ingredient.cs:
+public class Ingredient
+{
+    public string Name { get; set; }
+    public double Quantity { get; set; }
+    public string Unit { get; set; }
+    public int Calories { get; set; }
+    public string FoodGroup { get; set; }
+
+    public Ingredient(string name, double quantity, string unit, int calories, string foodGroup)
+    {
+        Name = name;
+        Quantity = quantity;
+        Unit = unit;
+        Calories = calories;
+        FoodGroup = foodGroup;
+    }
+}
+```
+
+Step.cs:
+public class Step
+{
+    public string Description { get; set; }
+
+    public Step(string description)
+    {
+        Description = description;
+    }
+}
+```
+
+Program.cs:
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,45 +197,93 @@ namespace RecipeApp
                 Console.WriteLine("3. Display recipe");  
                 Console.WriteLine("4. Scale recipe quantities");
                 Console.WriteLine("5. Reset recipe quantities");
-                Console.WriteLine("6. Clear recipes");
-                Console.WriteLine("7. Exit program");
+                Console.WriteLine("6. Clear recipesHere's the remaining code for Program.cs:
 
-                string input = Console.ReadLine();
-                switch (input)
+        static void EnterRecipe()
+        {
+            Console.WriteLine("Please enter the name of the recipe:");
+            string name = Console.ReadLine();
+            Recipe recipe = new Recipe(name);
+            bool addIngredients = true;
+            while (addIngredients)
+            {
+                Console.WriteLine("Please enter an ingredient name (or type 'done' to finish):");
+                string ingredientName = Console.ReadLine();
+                if (ingredientName == "done")
                 {
-                    case "1":
-                        EnterRecipe();
-                        break;
-                    case "2":
-                        DisplayRecipes();
-                        break;
-                    case "3":
-                        DisplayRecipe();
-                        break;  
-                    case "4":
-                        ScaleRecipe();
-                        break;
-                    case "5":
-                        ResetRecipe();
-                        break;
-                    case "6":
-                        ClearRecipes();
-                        break;
-                    case "7":
-                        runProgram = false;
-                        break;
+                    addIngredients = false;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter the quantity of " + ingredientName + ":");
+                    double quantity = double.Parse(Console.ReadLine());
+                    Console.WriteLine("Please enter the unit of measurement:");
+                    string unit = Console.ReadLine();
+                    Console.WriteLine("Please enter the number of calories:");
+                    int calories = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Please enter the food group:");
+                    string foodGroup = Console.ReadLine();
+                    Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, calories, foodGroup);
+                    recipe.AddIngredient(ingredient);
                 }
             }
-        }
-        
-        // Rest of code omitted for brevity
-        
-}
-```
+            bool addSteps = true;
+            while (addSteps)
+            {
+                Console.WriteLine("Please enter a step description (or type 'done' to finish):");
+                string stepDescription = Console.ReadLine();
+                if (stepDescription == "done")
+                {
+                    addSteps = false;
+                }
+                else
+                {
+                    Step step = new Step(stepDescription);
+Here's the remaining code for Program.cs:
 
-Recipe class:
-```csharp
-public class Recipe 
+        static void EnterRecipe()
+        {
+            Console.WriteLine("Please enter the name of the recipe:");
+            string name = Console.ReadLine();
+            Recipe recipe = new Recipe(name);
+            bool addIngredients = true;
+            while (addIngredients)
+            {
+                Console.WriteLine("Please enter an ingredient name (or type 'done' to finish):");
+                string ingredientName = Console.ReadLine();
+                if (ingredientName == "done")
+                {
+                    addIngredients = false;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter the quantity of " + ingredientName + ":");
+                    double quantity = double.Parse(Console.ReadLine());
+                    Console.WriteLine("Please enter the unit of measurement:");
+                    string unit = Console.ReadLine();
+                    Console.WriteLine("Please enter the number of calories:");
+                    int calories = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Please enter the food group:");
+                    string foodGroup = Console.ReadLine();
+                    Ingredient ingredient = new Ingredient(ingredientName, quantity, unit, calories, foodGroup);
+                    recipe.AddIngredient(ingredient);
+                }
+            }
+            bool addSteps = true;
+            while (addSteps)
+            {
+                Console.WriteLine("Please enter a step description (or type 'done' to finish):");
+                string stepDescription = Console.ReadLine();
+                if (stepDescription == "done")
+                {
+                    addSteps = false;
+                }
+                else
+                {
+                    Step step = new Step(stepDescription);
+
+Recipe.cs:
+public class Recipe
 {
     public string Name { get; set; }
     private List<Ingredient> ingredients;
@@ -75,5 +298,23 @@ public class Recipe
         calories = 0;
     }
 
-    // Rest of code omitted for brevity
-} 
+    public void AddIngredient(Ingredient ingredient)
+    {
+        ingredients.Add(ingredient);
+        calories += ingredient.Calories;
+    }
+
+    public void AddStep(Step step)
+    {
+        steps.Add(step);
+    }
+
+    public void DisplayRecipe()
+    {
+        Console.WriteLine("Recipe: " + Name);
+        Console.WriteLine("Ingredients:");
+        foreach (Ingredient ingredient in ingredients)
+        {
+            Console.WriteLine("- " + ingredient.Name + ": " + ingredient.Quantity + " " + ingredient.Unit + ", " + ingredient.Calories + " calories, " + ingredient.FoodGroup);
+        }
+        Console.WriteLine
